@@ -2,8 +2,9 @@
 import { init } from '../lib/commands/init.js';
 import { uninstall } from '../lib/commands/uninstall.js';
 import { doctor } from '../lib/commands/doctor.js';
+import { test } from '../lib/commands/test.js';
 
-const commands = { init, uninstall, doctor };
+const commands = { init, uninstall, doctor, test };
 
 const cmd = process.argv[2];
 
