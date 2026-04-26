@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import { init } from '../lib/commands/init.js';
 import { uninstall } from '../lib/commands/uninstall.js';
+import { doctor } from '../lib/commands/doctor.js';
 
-const commands = { init, uninstall };
+const commands = { init, uninstall, doctor };
 
 const cmd = process.argv[2];
 
