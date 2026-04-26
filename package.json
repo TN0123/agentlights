@@ -1,0 +1,29 @@
+{
+  "name": "agentlights",
+  "version": "0.1.0",
+  "description": "Color your Claude Code terminal pane when Claude is waiting on you",
+  "type": "module",
+  "bin": {
+    "agentlights": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "ghostty",
+    "terminal",
+    "hooks"
+  ]
+}
