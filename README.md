@@ -1,5 +1,9 @@
 # agentlights
 
+[![npm version](https://img.shields.io/npm/v/agentlights.svg)](https://www.npmjs.com/package/agentlights)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/node/v/agentlights.svg)](https://www.npmjs.com/package/agentlights)
+
 Color your Claude Code terminal pane when Claude is waiting on you.
 
 If you run multiple `claude` sessions in split terminal panes, `agentlights` gives each pane a subtle background tint when its Claude is idle and waiting on input — so you can tell at a glance which pane needs you.

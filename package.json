@@ -25,5 +25,14 @@
     "ghostty",
     "terminal",
     "hooks"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TN0123/agentlights.git"
+  },
+  "homepage": "https://github.com/TN0123/agentlights#readme",
+  "bugs": {
+    "url": "https://github.com/TN0123/agentlights/issues"
+  },
+  "author": "Tanay Naik <tanaynaik149@gmail.com>"
 }
