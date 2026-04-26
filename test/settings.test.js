@@ -143,3 +143,32 @@ test('uninstallHooks does not mutate input', () => {
   uninstallHooks(installed, SCRIPT);
   assert.deepEqual(installed, snapshot);
 });
+
+test('installHooks coerces non-array event values to empty array', () => {
+  const settings = { hooks: { Stop: 'not-an-array' } };
+  const result = installHooks(settings, SCRIPT);
+  assert.ok(Array.isArray(result.hooks.Stop));
+  assert.equal(result.hooks.Stop.length, 1, 'our entry was added');
+  assert.equal(result.hooks.Stop[0].hooks[0].command, `${SCRIPT} waiting`);
+});
+
+test('readSettings throws on non-object root (array)', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'agentlights-'));
+  const p = path.join(dir, 'settings.json');
+  await fs.writeFile(p, '[]');
+  await assert.rejects(readSettings(p), /must contain a JSON object/);
+});
+
+test('readSettings throws on non-object root (null)', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'agentlights-'));
+  const p = path.join(dir, 'settings.json');
+  await fs.writeFile(p, 'null');
+  await assert.rejects(readSettings(p), /must contain a JSON object/);
+});
+
+test('readSettings throws on non-object root (string)', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'agentlights-'));
+  const p = path.join(dir, 'settings.json');
+  await fs.writeFile(p, '"hello"');
+  await assert.rejects(readSettings(p), /must contain a JSON object/);
+});
