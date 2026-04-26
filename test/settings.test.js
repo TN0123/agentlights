@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { readSettings, writeSettings } from '../lib/settings.js';
-import { installHooks } from '../lib/settings.js';
+import { installHooks, uninstallHooks } from '../lib/settings.js';
 
 async function tmpFile() {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'agentlights-'));
@@ -98,4 +98,48 @@ test('installHooks handles missing hooks key', () => {
   const result = installHooks({ otherSetting: 'foo' }, SCRIPT);
   assert.equal(result.otherSetting, 'foo');
   assert.ok(result.hooks);
+});
+
+test('uninstallHooks removes our entries', () => {
+  const installed = installHooks({}, SCRIPT);
+  const result = uninstallHooks(installed, SCRIPT);
+  assert.deepEqual(result, {});
+});
+
+test('uninstallHooks preserves unrelated entries', () => {
+  const settings = {
+    hooks: {
+      Stop: [
+        { matcher: '', hooks: [{ type: 'command', command: '/usr/bin/notify' }] },
+        { matcher: '', hooks: [{ type: 'command', command: `${SCRIPT} waiting` }] }
+      ]
+    }
+  };
+  const result = uninstallHooks(settings, SCRIPT);
+  assert.equal(result.hooks.Stop.length, 1);
+  assert.equal(result.hooks.Stop[0].hooks[0].command, '/usr/bin/notify');
+});
+
+test('uninstallHooks on settings without our entries is a no-op', () => {
+  const settings = {
+    hooks: {
+      Stop: [
+        { matcher: '', hooks: [{ type: 'command', command: '/usr/bin/notify' }] }
+      ]
+    }
+  };
+  const result = uninstallHooks(settings, SCRIPT);
+  assert.deepEqual(result, settings);
+});
+
+test('uninstallHooks handles missing hooks key', () => {
+  const result = uninstallHooks({ otherSetting: 'foo' }, SCRIPT);
+  assert.deepEqual(result, { otherSetting: 'foo' });
+});
+
+test('uninstallHooks does not mutate input', () => {
+  const installed = installHooks({}, SCRIPT);
+  const snapshot = JSON.parse(JSON.stringify(installed));
+  uninstallHooks(installed, SCRIPT);
+  assert.deepEqual(installed, snapshot);
 });
