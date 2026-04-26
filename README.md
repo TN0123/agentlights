@@ -6,7 +6,16 @@
 
 Color your Claude Code terminal pane when Claude is waiting on you.
 
-If you run multiple `claude` sessions in split terminal panes, `agentlights` gives each pane a subtle background tint when its Claude is idle and waiting on input — so you can tell at a glance which pane needs you.
+<!--
+  Demo: drop a screen recording at docs/demo.gif (split panes, idle one glowing indigo),
+  then uncomment the <p>…</p> block below to surface it at the top of the README.
+
+<p align="center">
+  <img src="docs/demo.gif" alt="agentlights demo: split terminal panes with the idle Claude Code pane glowing indigo" width="720">
+</p>
+-->
+
+If you run **multiple Claude Code sessions in split terminal panes** and lose track of which pane is idle and waiting on input, `agentlights` gives each pane a subtle background tint the moment its Claude finishes a turn — so you can tell at a glance which pane needs you. It's a tiny shell script wired into Claude Code's [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks); no daemon, no plugin, no IPC.
 
 ## Install
 
@@ -48,7 +57,17 @@ Each terminal pane is independently signaled because OSC sequences only affect t
 
 ## Compatibility
 
-Tested on Ghostty. Should work in any terminal that supports OSC 11 + 111 (iTerm2, kitty, WezTerm, Alacritty), but those aren't officially verified yet — PRs welcome.
+agentlights uses [OSC 11 / OSC 111](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html), which most modern terminals support.
+
+| Terminal | Status |
+|---|---|
+| [Ghostty](https://ghostty.org) | Verified |
+| iTerm2 | Likely works — verification needed |
+| kitty | Likely works — verification needed |
+| WezTerm | Likely works — verification needed |
+| Alacritty | Likely works — verification needed |
+
+If `npx agentlights test` works in a terminal not yet marked Verified, please [open an issue](https://github.com/TN0123/agentlights/issues/new) so the table can be updated. PRs welcome.
 
 ## Troubleshooting
 
