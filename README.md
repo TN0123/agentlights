@@ -6,14 +6,9 @@
 
 Color your Claude Code terminal pane when Claude is waiting on you.
 
-<!--
-  Demo: drop a screen recording at docs/demo.gif (split panes, idle one glowing indigo),
-  then uncomment the <p>…</p> block below to surface it at the top of the README.
-
 <p align="center">
-  <img src="docs/demo.gif" alt="agentlights demo: split terminal panes with the idle Claude Code pane glowing indigo" width="720">
+  <img src="docs/demo.gif" alt="agentlights demo: four split Claude Code panes, with the idle one glowing indigo so you can tell at a glance which Claude is waiting on you" width="820">
 </p>
--->
 
 If you run **multiple Claude Code sessions in split terminal panes** and lose track of which pane is idle and waiting on input, `agentlights` gives each pane a subtle background tint the moment its Claude finishes a turn — so you can tell at a glance which pane needs you. It's a tiny shell script wired into Claude Code's [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks); no daemon, no plugin, no IPC.
 
