@@ -1,6 +1,6 @@
 {
   "name": "agentlights",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Color your Claude Code terminal pane when Claude is waiting on you",
   "type": "module",
   "bin": {
