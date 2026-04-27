@@ -2,7 +2,10 @@
 # agentlights — emits OSC 11 / OSC 111 to the controlling terminal
 # Called by Claude Code hooks. Argument is "waiting" or "reset".
 
-color="${AGENTLIGHTS_WAITING_COLOR:-#2a2733}"
+config="$HOME/.claude/agentlights/config.sh"
+[ -f "$config" ] && . "$config"
+
+color="${AGENTLIGHTS_WAITING_COLOR:-${AGENTLIGHTS_WAITING_COLOR_DEFAULT:-#2a2733}}"
 
 case "$1" in
   waiting)
